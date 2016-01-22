@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120164711) do
+ActiveRecord::Schema.define(version: 20160121191010) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "images", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160120164711) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "tag"
   end
 
   add_index "images", ["user_id"], name: "index_images_on_user_id"
