@@ -51,7 +51,7 @@
             <li><%= link_to 'Home', root_path  %></li>
             <% if current_user %>
             <li><%= link_to 'My Photos', images_path  %></li>
-            <li><%= link_to 'My Blog', "/path3"  %></li>
+            <li><%= link_to 'Collections', categories_path  %></li>
             <% else %>
             <li><%= link_to 'Images', images_path  %></li>
             <% end %>

@@ -10,6 +10,9 @@
   <dt><strong><%= model_class.human_attribute_name(:tag) %>:</strong></dt>
   <dd><%= @image.tag %></dd>
   <dd></dd>
+  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
+  <dd><%= render @image.categories %></dd>
+  <dd></dd>
   <dd><%= image_tag(@image.picture.url, size: "250x250") if @image.picture? %></dd>
 </dl>
 
