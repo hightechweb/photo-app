@@ -1,5 +1,7 @@
 class Image < ActiveRecord::Base
   belongs_to :user
+  has_many :image_categories #MTM ASSOCIATION
+  has_many :categories, through: :image_categories #MTM ASSOCIATION
   mount_uploader :picture, PictureUploader
   validate :picture_size
 
