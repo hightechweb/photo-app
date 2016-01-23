@@ -1,0 +1,28 @@
+<% obj.each do |i| %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="article-title">
+          <%= link_to i.name, image_path(i) %><br /><br />
+
+
+          <%= image_tag(i.picture.url, size: "250x250") if i.picture? %>
+
+
+
+        </div>
+        <div class="article-body">
+          <%= truncate(i.tag, length: 95) %>
+          <div class="article-meta-details">
+            <small>Published by: <%= i.user.email if i.user_id  %>,
+                  <%= time_ago_in_words(i.created_at) %> ago,
+                  last updated: <%= time_ago_in_words(i.updated_at) %> ago</small>
+          </div>
+        </div>
+        <% if i.categories.any? %>
+          <p>Categories: <%= render i.categories %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

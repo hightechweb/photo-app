@@ -1,0 +1,16 @@
+<% # Meta information for the <head> section %>
+<%# title @category.name %>
+
+<h1 align="center"><%= "Category: " + @category.name %></h1>
+<div align="center">
+  <%# if logged_in? %>
+    <div class="row">
+      <span class="badge"><%= link_to "Edit Category Name", edit_category_path(@category) %></span>
+    </div><br />
+  <%# end %>
+  <%= will_paginate @category_images %>
+</div>
+<%= render 'images/image', obj: @category_images %>
+<div align="center">
+  <%= will_paginate @category_images %>
+</div>
