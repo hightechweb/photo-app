@@ -1,10 +1,13 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
+  #before_action :require_user, except: [:show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    #@images = Image.all
+    @images = current_user.images.all
   end
 
   # GET /images/1
@@ -26,7 +29,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
     @image.user = current_user
-    
+
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
@@ -72,4 +75,19 @@ class ImagesController < ApplicationController
     def image_params
       params.require(:image).permit(:name, :tag, :picture, :user_id, category_ids: [])
     end
+
+#     def require_user
+#       if current_user != @images.user
+#         flash[:danger] = "You can view your own image collections!"
+#         redirect_to root_path
+#       end
+#     end
+
+    def require_same_user
+      if current_user != @image.user and !current_user.admin?
+        flash[:danger] = "You can only edit or delete your own images!"
+        redirect_to root_path
+      end
+    end
+
 end
